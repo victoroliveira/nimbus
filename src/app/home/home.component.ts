@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  cities = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    this.cities = [{
+      name: 'Sao Paolo'
+    }, {
+      name: 'Buenos Aires'
+    }, {
+      name: 'Lima'
+    }, {
+      name: 'Santiago'
+    }];
   }
 
 }
