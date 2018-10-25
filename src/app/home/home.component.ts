@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { WeatherService } from '../services/weather.service';
+import { AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +10,18 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   cities = [];
 
-  constructor() {
+  constructor(private weather: WeatherService) {
   }
 
   ngOnInit() {
-    this.cities = [{
-      name: 'Sao Paolo'
-    }, {
-      name: 'Buenos Aires'
-    }, {
-      name: 'Lima'
-    }, {
-      name: 'Santiago'
-    }];
+    this.cities = AppSettings.CITIES;
+    this.weather.getCitiesWeatherById(this.cities)
+    .subscribe((response) => {
+      console.log('RESPONSE');
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 }
