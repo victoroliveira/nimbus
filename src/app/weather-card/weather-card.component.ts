@@ -7,7 +7,7 @@ import { AppSettings } from '../app.settings';
   styleUrls: ['./weather-card.component.scss']
 })
 export class WeatherCardComponent implements OnInit {
-  @Input() city: Object;
+  @Input() city: any;
 
   constructor() { }
 

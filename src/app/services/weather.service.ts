@@ -10,7 +10,7 @@ export class WeatherService {
 
   constructor(public http: HttpClient) { }
 
-  private separateIdsByComma(arr) {
+  private separateIdsByComma(arr): string {
     let str = '';
     arr.forEach((city, index) => {
       str += city.id.toString();
