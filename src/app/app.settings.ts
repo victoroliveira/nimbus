@@ -2,6 +2,7 @@ export class AppSettings {
   public static API_KEY = '84487947ce18e6d9bad1405df35f91df';
   public static ENDPOINT = 'https://api.openweathermap.org/data/2.5/';
   public static ICON_ENDPOINT = 'http://openweathermap.org/img/w/';
+  public static TIMER = 180000;
   public static CITIES = [
   {
     id: 3448439,
