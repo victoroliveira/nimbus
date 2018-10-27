@@ -9,12 +9,14 @@ import { HomeComponent } from './home/home.component';
 import { WeatherCardComponent } from './weather-card/weather-card.component';
 import { WeatherService } from './services/weather.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FirstLetterUpperPipe } from './pipes/first-letter-upper.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    WeatherCardComponent
+    WeatherCardComponent,
+    FirstLetterUpperPipe
   ],
   imports: [
     BrowserModule,

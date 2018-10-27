@@ -15,13 +15,8 @@ export class WeatherCardComponent implements OnInit {
     return `${AppSettings.ICON_ENDPOINT}${id}.png`;
   }
 
-  private firstLetterUpper(str: string) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
   ngOnInit() {
     this.city.iconUrl = this.mountIconUrl(this.city.weather[0].icon);
-    this.city.description = this.firstLetterUpper(this.city.weather[0].description);
   }
 
 }
