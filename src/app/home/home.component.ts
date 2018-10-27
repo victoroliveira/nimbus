@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { AppSettings } from '../app.settings';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +12,28 @@ export class HomeComponent implements OnInit {
   cities: any[] = new Array();
   citiesData: any;
   weatherSub: Subscription;
+  timerSub: Subscription;
 
   constructor(private weather: WeatherService) {
   }
 
   ngOnInit() {
-    this.cities = AppSettings.CITIES;
-    this.weatherSub = this.weather.getCitiesWeatherById(this.cities)
+    this.setCities(AppSettings.CITIES);
+    this.getCitiesData();
+    this.subscribeTimer();
+  }
+
+  private setCities(cities: Array<any>): void {
+    this.cities = cities;
+  }
+
+  private getCities(): Array<any> {
+    return this.cities;
+  }
+
+  private getCitiesData(): void {
+    const cities = this.getCities();
+    this.weatherSub = this.weather.getCitiesWeatherById(cities)
     .subscribe((response) => {
       this.citiesData = response;
     }, (error) => {
@@ -26,8 +41,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  private subscribeTimer(): void {
+    this.timerSub =  interval(AppSettings.TIMER).subscribe(() => {
+      this.getCitiesData();
+    });
+  }
+
   ngOnDestroy() {
     this.weatherSub.unsubscribe();
+    this.timerSub.unsubscribe();
   }
 
 }
