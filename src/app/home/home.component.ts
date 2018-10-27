@@ -8,7 +8,8 @@ import { AppSettings } from '../app.settings';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  cities = [];
+  cities: any[] = new Array();
+  citiesData: any;
 
   constructor(private weather: WeatherService) {
   }
@@ -17,8 +18,7 @@ export class HomeComponent implements OnInit {
     this.cities = AppSettings.CITIES;
     this.weather.getCitiesWeatherById(this.cities)
     .subscribe((response) => {
-      console.log('RESPONSE');
-      console.log(response);
+      this.citiesData = response;
     }, (error) => {
       console.log(error);
     });
