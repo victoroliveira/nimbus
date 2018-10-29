@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { AppSettings } from '../app.settings';
 import { Subscription, interval } from 'rxjs';
@@ -8,7 +8,7 @@ import { Subscription, interval } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   cities: any[] = new Array();
   citiesData: any;
   weatherSub: Subscription;
@@ -48,8 +48,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.weatherSub.unsubscribe();
-    this.timerSub.unsubscribe();
+    if (this.weatherSub) {
+      this.weatherSub.unsubscribe();
+    }
+    if (this.timerSub) {
+      this.timerSub.unsubscribe();
+    }
   }
-
 }
